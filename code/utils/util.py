@@ -58,6 +58,7 @@ def parse_args():
     parser.add_argument("--max_seq_length", default=50, type=int)
 
     # train args
+    parser.add_argument("--num_workers", type=int, default=2, help="num_workers")
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate of adam")
     parser.add_argument(
         "--batch_size", type=int, default=256, help="number of batch_size"
@@ -73,6 +74,8 @@ def parse_args():
     parser.add_argument(
         "--adam_beta2", type=float, default=0.999, help="adam second beta value"
     )
+    parser.add_argument("--patience", type=int, default=5, help="patience")
+    parser.add_argument("--factor", default=0.5, type=float, help="optimizer factor")
 
     # pre train args
     parser.add_argument(
@@ -86,7 +89,9 @@ def parse_args():
     parser.add_argument("--sp_weight", type=float, default=0.5, help="sp loss weight")
 
     # User-Specific Settings
-    parser.add_argument("--using_pretrain", action="store_true")
+    parser.add_argument(
+        "--using_pretrain", type=bool, default=False, help="use to pretrain"
+    )
     parser.add_argument(
         "--data_preprocessor_title",
         default="TempDataPreprocessor",

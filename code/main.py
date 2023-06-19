@@ -8,7 +8,7 @@ from model.loss import get_loss
 from trainer.optimizer import get_optimizer
 from trainer.scheduler import get_scheduler
 import trainer.trainer as module_trainer
-from utils import parse_args, set_seeds, get_logger, logging_conf, checkDirectory
+from utils.util import parse_args, set_seeds, get_logger, logging_conf, checkDirectory
 
 # import wandb
 

@@ -6,7 +6,7 @@ import data_loader.data_preprocessor as module_data_preprocessor
 import data_loader.dataset as module_dataset
 import model.model as module_model
 import trainer.trainer as module_trainer
-from utils import parse_args, set_seeds, get_logger, logging_conf, checkDirectory
+from utils.util import parse_args, set_seeds, get_logger, logging_conf, checkDirectory
 
 # import wandb
 
@@ -32,7 +32,7 @@ def main(args):
     args.submission_dataloader = DataLoader(
         submission_dataset,
         num_workers=args.num_workers,
-        shuffle=True,
+        shuffle=False,
         batch_size=args.batch_size,
     )
 

@@ -1,6 +1,6 @@
 import pandas as pd
 from abc import abstractmethod
-from utils import get_logger, logging_conf
+from utils.util import get_logger, logging_conf
 from model.metric import *
 
 logger = get_logger(logger_conf=logging_conf)
