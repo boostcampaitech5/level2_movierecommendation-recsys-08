@@ -210,7 +210,7 @@ class TransformerTrainer(BaseTrainer):
 
             for idx, items in enumerate(pred_list):
                 for item in items:
-                    result.append(args.users[idx], item)
+                    result.append((args.users[idx], item))
 
             return result
         else:
