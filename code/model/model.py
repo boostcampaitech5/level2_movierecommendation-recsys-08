@@ -27,8 +27,8 @@ class SASRec(BaseModel):
         self.device = args.device
         self.item_embedding = nn.Embedding(args.num_items, args.hidden_size)
         self.position_embedding = nn.Embedding(args.max_seq_length, args.hidden_size)
-        self.LayerNorm = nn.LayerNorm(args.hidden_size, eps=1e-12).to(args.device)
-        self.dropout = nn.Dropout(args.hidden_dropout_prob)
+        self.norm = nn.LayerNorm(args.hidden_size).to(args.device)
+        self.drop_out = nn.Dropout(args.hidden_dropout_prob)
         self.layers = nn.ModuleList(
             [copy.deepcopy(Block(args)) for _ in range(args.num_hidden_layers)]
         )
@@ -70,8 +70,8 @@ class SASRec(BaseModel):
         position_embedding = self.position_embedding(position_ids)
 
         sequence_emb = item_embedding + position_embedding
-        sequence_emb = self.LayerNorm(sequence_emb)
-        sequence_emb = self.dropout(sequence_emb)
+        sequence_emb = self.norm(sequence_emb)
+        sequence_emb = self.drop_out(sequence_emb)
 
         return sequence_emb
 
@@ -102,7 +102,7 @@ class Block(nn.Module):
         super(Block, self).__init__()
         self.self_attention = MultiHeadAttention(args)
         self.feed_forward = FeedForward(args)
-        self.add_norms = [Add_Norm(args) for _ in range(2)]
+        self.add_norms = nn.ModuleList([Add_Norm(args) for _ in range(2)])
 
     def forward(self, x, mask=None):
         out = self.add_norms[0](x, lambda x: self.self_attention(x, mask))
@@ -113,12 +113,14 @@ class Block(nn.Module):
 class MultiHeadAttention(nn.Module):
     def __init__(self, args):
         super(MultiHeadAttention, self).__init__()
-        self.model_size = args.hidden_size * args.num_attention_heads
+        self.model_size = args.hidden_size
         self.n_heads = args.num_attention_heads
         self.q_fc = nn.Linear(args.hidden_size, self.model_size)
         self.k_fc = nn.Linear(args.hidden_size, self.model_size)
         self.v_fc = nn.Linear(args.hidden_size, self.model_size)
         self.out_fc = nn.Linear(self.model_size, args.hidden_size)
+
+        self.attention_dropout = nn.Dropout(args.attention_probs_dropout_prob)
 
     def forward(self, x, mask=None):
         n_batch = x.size(0)
@@ -140,6 +142,7 @@ class MultiHeadAttention(nn.Module):
             if mask is not None:
                 attention_score = attention_score.masked_fill(mask == 0, -1e12)
             attention_score = torch.softmax(attention_score, dim=-1)
+            attention_score = self.attention_dropout(attention_score)
             out = torch.matmul(attention_score, V)
             return out
 
@@ -154,7 +157,7 @@ class FeedForward(nn.Module):
     def __init__(self, args):
         super(FeedForward, self).__init__()
         self.fc1 = nn.Linear(args.hidden_size, args.hidden_size * 4)
-        self.activation = nn.ReLU()
+        self.activation = lambda x: x * 0.5 * (1.0 + torch.erf(x / sqrt(2.0)))
         self.fc2 = nn.Linear(args.hidden_size * 4, args.hidden_size)
 
     def forward(self, x):
