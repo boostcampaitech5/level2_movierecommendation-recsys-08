@@ -31,6 +31,7 @@ class TransformerDataPreprocessor(BaseDataPreprocessor):
     def preprocessing(self, args):
         self.get_user_sequences(args)
         self.get_all_items(args)
+        self.augment_data(args)
         args.valid_rating_matrix = self.generate_rating_matrix(args, "valid")
         args.test_rating_matrix = self.generate_rating_matrix(args, "test")
         args.submission_rating_matrix = self.generate_rating_matrix(args, "submission")
@@ -47,6 +48,26 @@ class TransformerDataPreprocessor(BaseDataPreprocessor):
     def get_all_items(self, args):
         df = pd.read_csv(args.data_file)
         args.all_items = df["item"].unique()
+
+    def augment_data(self, args):
+        args.train_sequences = list()
+        length = args.max_seq_length + 3
+        sliding = args.max_seq_length // 6
+
+        for user_sequence in args.user_sequences:
+            n = len(user_sequence)
+            if n > length:
+                now = -length
+                threshold = -n
+
+                while now >= threshold:
+                    if now + length == 0:
+                        args.train_sequences.append(user_sequence[now:])
+                    else:
+                        args.train_sequences.append(user_sequence[now : now + length])
+                    now -= sliding
+            else:
+                args.train_sequences.append(user_sequence)
 
     def generate_rating_matrix(self, args, mode="valid"):
         row = []

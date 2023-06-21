@@ -39,6 +39,8 @@ class TransformerDataset(Dataset):
     def __init__(self, args, data_type="train"):
         super().__init__()
         self.data_type = data_type
+        self.augmentation = True
+        self.train_sequences = args.train_sequences
         self.user_sequences = args.user_sequences
         self.all_items = args.all_items
         self.num_items = args.num_items
@@ -47,7 +49,13 @@ class TransformerDataset(Dataset):
         assert self.data_type in {"train", "valid", "test", "submission"}
 
     def __getitem__(self, index):
-        items = self.user_sequences[index]
+        if self.augmentation:
+            if self.data_type == "train":
+                items = self.train_sequences[index]
+            else:
+                items = self.user_sequences[index]
+        else:
+            items = self.user_sequences[index]
 
         if self.data_type == "pretrain":
             pass
@@ -100,4 +108,10 @@ class TransformerDataset(Dataset):
         )
 
     def __len__(self):
-        return len(self.user_sequences)
+        if self.augmentation:
+            if self.data_type == "train":
+                return len(self.train_sequences)
+            else:
+                return len(self.user_sequences)
+        else:
+            return len(self.user_sequences)
