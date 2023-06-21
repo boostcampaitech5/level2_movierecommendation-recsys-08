@@ -43,7 +43,7 @@ class GTN(BaseModel):
                 for _ in range(args.num_hidden_layers)
             ]
         )
-        # self.output = nn.Linear(args.hidden_size * 2, args.hidden_size)
+        self.output = nn.Linear(args.hidden_size * 2, args.hidden_size)
 
         self.initializer_range = args.initializer_range
         if not args.using_pretrain:

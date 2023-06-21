@@ -27,7 +27,6 @@ class TransformerDataPreprocessor(BaseDataPreprocessor):
     def __init__(self, args):
         super().__init__()
         args.data_file = args.data_dir + "train_ratings.csv"
-        self.preprocessing(args)
 
     def preprocessing(self, args):
         self.get_user_sequences(args)
