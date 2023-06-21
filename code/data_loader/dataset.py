@@ -40,6 +40,7 @@ class TransformerDataset(Dataset):
         super().__init__()
         self.data_type = data_type
         self.user_sequences = args.user_sequences
+        self.all_items = args.all_items
         self.num_items = args.num_items
         self.max_seq_length = args.max_seq_length
 
@@ -73,7 +74,7 @@ class TransformerDataset(Dataset):
 
         target_neg = []
         for _ in target_pos:
-            target_neg.append(negative_sampling(set(items), self.num_items))
+            target_neg.append(negative_sampling(set(items), self.all_items))
 
         # padding
         pad_len = self.max_seq_length - len(input_ids)
