@@ -52,20 +52,21 @@ class TransformerDataPreprocessor(BaseDataPreprocessor):
     def augment_data(self, args):
         args.train_sequences = list()
         length = args.max_seq_length + 3
-        sliding = args.max_seq_length // 6
-
+        sliding = 2
+        limit = 5
         for user_sequence in args.user_sequences:
             n = len(user_sequence)
             if n > length:
                 now = -length
                 threshold = -n
-
-                while now >= threshold:
+                k = 0
+                while now >= threshold and k < limit:
                     if now + length == 0:
                         args.train_sequences.append(user_sequence[now:])
                     else:
                         args.train_sequences.append(user_sequence[now : now + length])
                     now -= sliding
+                    k += 1
             else:
                 args.train_sequences.append(user_sequence)
 
