@@ -1,10 +1,10 @@
 ### RecSys_8조
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f54cfbd0-c0e3-43c4-8a50-7a08e756dcbb/Untitled.png)
+<img width="1079" alt="Untitled" src="https://github.com/boostcampaitech5/level2_movierecommendation-recsys-08/assets/62981031/1286e62b-4f1b-4d52-8269-addf6a9c30f3">
 
 ### 🥈 최종 결과
 
-![스크린샷 2023-08-01 오후 4.34.05.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/636f14c3-f30a-4604-9023-995ef4cb3d6e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2023-08-01_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.34.05.png)
+<img width="1083" alt="스크린샷 2023-08-01 오후 4 34 05" src="https://github.com/boostcampaitech5/level2_movierecommendation-recsys-08/assets/62981031/5eeffa67-4627-4d0f-bcb0-4d81e6abe0bc">
 
 ## 👼 Member
 <table align="center">
@@ -93,8 +93,8 @@ level2_movierecommendation-recsys-08
     └── README.md
 ```
 
-## 💻 Wrap up Report
+## 💻 Project Report
 
 ---
 
-[https://github.com/boostcampaitech5/level2_movierecommendation-recsys-08/blob/master/[Recsys 8조 EXIT] Movie Recommendation Wrap Up Report.pdf](https://github.com/boostcampaitech5/level2_movierecommendation-recsys-08/blob/master/%5BRecsys%208%EC%A1%B0%20EXIT%5D%20Movie%20Recommendation%20Wrap%20Up%20Report.pdf)
+[Wrap-Up Report Link](https://github.com/boostcampaitech5/level2_movierecommendation-recsys-08/blob/master/%5BRecsys%208%EC%A1%B0%20EXIT%5D%20Movie%20Recommendation%20Wrap%20Up%20Report.pdf)
