@@ -27,19 +27,19 @@
   </tr>
   <tr height="80px">
     <td align="center" width="150px">
-      <a href="https://github.com/ghwns82">김지우_T5063</a>
+      <a href="https://github.com/rlawldn117032">김지우_T5063</a>
     </td>
     <td align="center" width="150px">
-      <a href="https://github.com/dhkim77000">박수현_T5085</a>
+      <a href="https://github.com/Sh-IT0311">박수현_T5085</a>
     </td>
     <td align="center" width="150px">
-      <a href="https://github.com/sangwu99">석예림_T5110</a>
+      <a href="https://github.com/rimmiya">석예림_T5110</a>
     </td>
     <td align="center" width="150px">
-      <a href="https://github.com/y2r1m">임소영_T5172</a>
+      <a href="https://github.com/AI-soyoung">임소영_T5172</a>
     </td>
     <td align="center" width="150px">
-      <a href="https://github.com/AI-soyoung">전증원_T5185</a>
+      <a href="https://github.com/1132jjw">전증원_T5185</a>
     </td>
   </tr>
   <tr height="140px">
